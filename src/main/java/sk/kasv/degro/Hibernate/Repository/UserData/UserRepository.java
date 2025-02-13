@@ -34,4 +34,16 @@ public class UserRepository implements IUserRepository {
         entityManager.persist(user);
         return user;
     }
+
+    @Override
+    @Transactional
+    public User updateUser(User user, int id) {
+        User userToUpdate = entityManager.find(User.class, id);
+        userToUpdate.setName(user.getName());
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setAge(user.getAge());
+        userToUpdate.setWeight(user.getWeight());
+
+        return userToUpdate;
+    }
 }

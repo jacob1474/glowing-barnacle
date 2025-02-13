@@ -43,10 +43,29 @@ public class User {
         return weight;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
     public User(String name, String email, int age, double weight) {
         this.name = name;
         this.email = email;
         this.age = age;
         this.weight = weight;
+    }
+
+    public User() {
     }
 }
