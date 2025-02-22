@@ -1,38 +1,35 @@
-CREATE DATABASE IF NOT EXISTS FitnessApp;
-USE FitnessApp;
-
 DROP TABLE IF EXISTS user_workouts;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS workouts;
 DROP TABLE IF EXISTS categories;
 
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    age INT CHECK (age >= 0),
-    weight DECIMAL(5,2) CHECK (weight > 0)
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    age INTEGER CHECK (age >= 0),
+    weight REAL CHECK (weight > 0)
 );
 
 CREATE TABLE categories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE workouts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
     description TEXT,
-    category_id INT,
+    category_id INTEGER,
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
 
 CREATE TABLE user_workouts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    workout_id INT NOT NULL,
-    date DATE NOT NULL DEFAULT (CURRENT_DATE),
-    duration INT NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    workout_id INTEGER NOT NULL,
+    date TEXT NOT NULL DEFAULT CURRENT_DATE,
+    duration INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (workout_id) REFERENCES workouts(id) ON DELETE CASCADE
 );
