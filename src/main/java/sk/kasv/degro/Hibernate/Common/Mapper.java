@@ -1,5 +1,6 @@
 package sk.kasv.degro.Hibernate.Common;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import sk.kasv.degro.Hibernate.Contracts.CategoryData.CategoryDataDtoOut;
 import sk.kasv.degro.Hibernate.Contracts.UserData.UserDataDtoOut;
+import sk.kasv.degro.Hibernate.Contracts.WorkoutData.UserWorkoutDataDtoOut;
 import sk.kasv.degro.Hibernate.Contracts.WorkoutData.WorkoutDataDtoOut;
 import sk.kasv.degro.Hibernate.Database.Entity.User;
+import sk.kasv.degro.Hibernate.Database.Entity.UserWorkout;
 import sk.kasv.degro.Hibernate.Database.Entity.Workout;
 import sk.kasv.degro.Hibernate.Database.Entity.Category;
 
@@ -62,7 +65,7 @@ public class Mapper {
     public WorkoutDataDtoOut ToWorkoutDataDtoOut(Workout workout){
         WorkoutDataDtoOut workoutDataDtoOut = new WorkoutDataDtoOut();
         workoutDataDtoOut.name = workout.getName();
-        workoutDataDtoOut.id = workout.getId();
+        workoutDataDtoOut.workoutId = workout.getId();
         workoutDataDtoOut.category = ToCategoryDataDtoOut(workout.getCategory());
         workoutDataDtoOut.description = workout.getDescription();
 
@@ -77,5 +80,27 @@ public class Mapper {
         }
 
         return workoutDataDtoOutList;
+    }
+
+    public UserWorkoutDataDtoOut ToUserWorkoutDataDtoOut(User user, UserWorkout workout){
+        UserWorkoutDataDtoOut userWorkoutDataDtoOut = new UserWorkoutDataDtoOut();
+        userWorkoutDataDtoOut.user = ToUserDataDtoOut(workout.getUser());
+        userWorkoutDataDtoOut.workout = ToWorkoutDataDtoOut(workout.getWorkout());
+        userWorkoutDataDtoOut.duration = workout.getDuration();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Adjust format if needed
+        userWorkoutDataDtoOut.date = workout.getDate().format(formatter); 
+
+        return userWorkoutDataDtoOut;
+    }
+
+    public List<UserWorkoutDataDtoOut> ToUserWorkoutDataDtoOut(User user, List<UserWorkout> workouts){
+        List<UserWorkoutDataDtoOut> userWorkoutDataDtoOutList = new ArrayList<UserWorkoutDataDtoOut>();
+
+        for(UserWorkout workout : workouts){
+            userWorkoutDataDtoOutList.add(ToUserWorkoutDataDtoOut(user, workout));
+        }
+
+        return userWorkoutDataDtoOutList;
     }
 }

@@ -6,5 +6,5 @@ public class WorkoutDataDtoOut {
     public String name;
     public String description;
     public CategoryDataDtoOut category;
-    public int id;
+    public int workoutId;
 }

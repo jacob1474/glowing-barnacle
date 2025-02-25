@@ -47,5 +47,18 @@ public class WorkoutDataController {
     public String getWorkoutsByCategory(@PathVariable int categoryId) {
         return Json.pretty(workoutService.getWorkoutsByCategoryId(categoryId));
     }
+
+    @Operation(summary = "Get workouts by user id")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successful Response"),
+        @ApiResponse(responseCode = "400", description = "Bad Request"),
+        @ApiResponse(responseCode = "401", description = "Unauthorized"),
+        @ApiResponse(responseCode = "404", description = "Not Found"),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    @RequestMapping(value = "/getWorkoutsByUser/{userId}", method = RequestMethod.GET)
+    public String getWorkoutsByUser(@PathVariable int userId) {
+        return Json.pretty(workoutService.getWorkoutsByUserId(userId));
+    }
 }
 

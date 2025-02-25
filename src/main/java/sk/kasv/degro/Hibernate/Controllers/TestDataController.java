@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-public class TesDataController {
+public class TestDataController {
     @Operation(summary = "Test connection")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful Response"),
