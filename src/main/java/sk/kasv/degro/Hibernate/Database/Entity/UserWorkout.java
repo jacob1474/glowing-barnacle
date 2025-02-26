@@ -22,7 +22,7 @@ public class UserWorkout {
     private Workout workout;
 
     @Column(name = "date", nullable = false)
-    private LocalDate date;
+    private String date;
 
     @Column(name = "duration", nullable = false)
     private int duration;
@@ -37,8 +37,8 @@ public class UserWorkout {
     public Workout getWorkout() { return workout; }
     public void setWorkout(Workout workout) { this.workout = workout; }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public LocalDate getDate() { return LocalDate.parse(date); }
+    public void setDate(LocalDate date) { this.date = date.toString(); }
 
     public int getDuration() { return duration; }
     public void setDuration(int duration) { this.duration = duration; }

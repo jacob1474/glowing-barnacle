@@ -87,9 +87,8 @@ public class Mapper {
         userWorkoutDataDtoOut.user = ToUserDataDtoOut(workout.getUser());
         userWorkoutDataDtoOut.workout = ToWorkoutDataDtoOut(workout.getWorkout());
         userWorkoutDataDtoOut.duration = workout.getDuration();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Adjust format if needed
-        userWorkoutDataDtoOut.date = workout.getDate().format(formatter); 
+        userWorkoutDataDtoOut.date = workout.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        
 
         return userWorkoutDataDtoOut;
     }
